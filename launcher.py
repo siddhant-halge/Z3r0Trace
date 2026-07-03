@@ -5,19 +5,21 @@ import webbrowser
 import pyperclip
 import os
 import sys
+import shutil
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-PYTHON = os.path.join(BASE_DIR, "venv", "Scripts", "python.exe")
 APP = os.path.join(BASE_DIR, "app.py")
+
+# Use the current Python interpreter (works everywhere)
+PYTHON = sys.executable
 
 print("=" * 60)
 print("            Z3r0Trace Launcher")
 print("=" * 60)
 
-# --------------------------------------------------
+# -----------------------------
 # Start Flask
-# --------------------------------------------------
+# -----------------------------
 
 print("[+] Starting Flask Server...")
 
@@ -28,72 +30,77 @@ flask_process = subprocess.Popen(
 
 time.sleep(3)
 
-# --------------------------------------------------
-# Start Ngrok
-# --------------------------------------------------
+# -----------------------------
+# Check Ngrok
+# -----------------------------
 
-print("[+] Starting Ngrok Tunnel...")
+ngrok_path = shutil.which("ngrok")
 
-ngrok_process = subprocess.Popen(
-    ["ngrok", "http", "5000"],
-    stdout=subprocess.DEVNULL,
-    stderr=subprocess.DEVNULL
-)
+if ngrok_path:
 
-time.sleep(5)
+    print("[+] Starting Ngrok Tunnel...")
 
-# --------------------------------------------------
-# Get Public URL
-# --------------------------------------------------
+    ngrok_process = subprocess.Popen(
+        [ngrok_path, "http", "5000"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
 
-print("[+] Fetching Public URL...")
+    public_url = None
 
-public_url = None
+    # Wait until Ngrok API becomes available
+    for _ in range(20):
 
-try:
+        try:
 
-    tunnels = requests.get(
-        "http://127.0.0.1:4040/api/tunnels"
-    ).json()
+            response = requests.get(
+                "http://127.0.0.1:4040/api/tunnels",
+                timeout=2
+            )
 
-    public_url = tunnels["tunnels"][0]["public_url"]
+            data = response.json()
 
-except Exception:
+            if data["tunnels"]:
 
-    print("[-] Unable to read Ngrok URL.")
+                public_url = data["tunnels"][0]["public_url"]
 
-# --------------------------------------------------
-# Copy URL
-# --------------------------------------------------
+                break
 
-if public_url:
+        except Exception:
 
-    pyperclip.copy(public_url)
+            pass
 
-    print()
+        time.sleep(1)
 
-    print("=" * 60)
+    if public_url:
 
-    print(f"Local URL : http://127.0.0.1:5000")
+        pyperclip.copy(public_url)
 
-    print(f"Public URL: {public_url}")
+        print()
 
-    print()
+        print("=" * 60)
 
-    print("Public URL copied to clipboard!")
+        print(f"Local URL : http://127.0.0.1:5000")
+        print(f"Public URL: {public_url}")
 
-    print("=" * 60)
+        print("=" * 60)
 
-    webbrowser.open(public_url)
+        webbrowser.open(public_url)
+
+    else:
+
+        print("[!] Ngrok started but public URL could not be retrieved.")
+
+        webbrowser.open("http://127.0.0.1:5000")
 
 else:
+
+    print("[!] Ngrok not found.")
 
     webbrowser.open("http://127.0.0.1:5000")
 
 print()
-
-print("Z3r0Trace is Running")
-
+print("Z3r0Trace is running...")
 print()
 
 try:
@@ -104,6 +111,8 @@ try:
 except KeyboardInterrupt:
 
     flask_process.terminate()
-    ngrok_process.terminate()
+
+    if ngrok_path:
+        ngrok_process.terminate()
 
     print("Stopped.")
