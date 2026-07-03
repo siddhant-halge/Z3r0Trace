@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Uploaded Files - Z3r0Trace</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Z3r0Trace</h1>
+
+    <h2>Uploaded Files</h2>
+
+    <table>
+
+        <tr>
+            <th>Filename</th>
+            <th>Size (KB)</th>
+            <th>Action</th>
+        </tr>
+
+        {% for file in files %}
+
+        <tr>
+
+            <td>{{ file.name }}</td>
+
+            <td>{{ file.size }}</td>
+
+            <td>
+
+                <a href="/download/{{ file.name }}"
+                   class="download-btn">
+                    ⬇ Download
+                </a>
+
+                &nbsp;&nbsp;
+
+                <a href="/delete/{{ file.name }}"
+                   class="delete-btn"
+                   onclick="return confirm('Are you sure you want to delete this file?');">
+
+                    🗑 Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br><br>
+
+    <a href="/" class="button">
+        Home
+    </a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Upload File</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Z3r0Trace</h1>
+
+<h2>Drag & Drop Upload</h2>
+
+<form method="POST"
+      enctype="multipart/form-data">
+
+    <div id="drop-area">
+
+        <p>📂 Drag & Drop Files Here</p>
+
+        <p>or</p>
+
+        <button type="button"
+                id="browse-btn">
+            Browse File
+        </button>
+
+        <input type="file"
+               id="fileElem"
+               name="file"
+               hidden>
+
+        <p id="file-name">
+            No file selected
+        </p>
+
+    </div>
+
+    <br>
+
+    <input type="submit"
+           value="Upload"
+           class="button">
+
+</form>
+
+{% if message %}
+
+<h3>{{ message }}</h3>
+
+{% endif %}
+
+<br>
+
+<a href="/">Home</a>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+
+</body>
+
+</html>

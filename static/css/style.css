@@ -1,0 +1,331 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family: Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.75),
+            rgba(0,0,0,.75)
+        ),
+        url("../images/hacker-bg.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    color:#00ff66;
+
+    min-height:100vh;
+
+}
+
+.container{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+.subtitle{
+
+    color:white;
+
+    font-size:28px;
+
+    margin:20px 0;
+
+}
+
+h1,h2,h3{
+
+    color:#00ff66;
+
+    text-align:center;
+
+    text-shadow:0 0 10px #00ff66;
+
+}
+
+p{
+
+    color:white;
+
+}
+
+.button{
+
+    display:block;
+
+    width:320px;
+
+    padding:18px;
+
+    margin:20px auto;
+
+    background:#00ff66;
+
+    color:black;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    text-decoration:none;
+
+    border-radius:8px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.button:hover{
+
+    background:#00cc55;
+
+    box-shadow:0 0 20px #00ff66;
+
+}
+.button-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+    background:rgba(0,0,0,.6);
+
+}
+
+th{
+
+    background:#00ff66;
+
+    color:black;
+
+}
+
+th,td{
+
+    padding:12px;
+
+    border:1px solid #00ff66;
+
+    text-align:center;
+
+}
+
+a{
+
+    color:#00ff66;
+
+    text-decoration:none;
+
+}
+
+a:hover{
+
+    color:white;
+
+}
+
+input[type="file"]{
+
+    color:white;
+
+    margin:20px;
+
+}
+
+input[type="submit"]{
+
+    cursor:pointer;
+}
+/* ==========================
+   Download Button
+========================== */
+
+.download-btn{
+
+    color:#00ff66;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.download-btn:hover{
+
+    color:#00ffff;
+
+}
+
+
+/* ==========================
+   Delete Button
+========================== */
+
+.delete-btn{
+
+    color:#ff4444;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    color:#ff0000;
+
+}
+
+
+/* ==========================
+   Table
+========================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+    background:rgba(0,0,0,.65);
+
+}
+
+th{
+
+    background:#00ff66;
+
+    color:black;
+
+    padding:15px;
+
+}
+
+td{
+
+    padding:15px;
+
+    border:1px solid #00ff66;
+
+    color:white;
+
+}
+
+
+/* ==============================
+   Drag & Drop Upload
+============================== */
+
+#drop-area{
+
+    width:500px;
+
+    margin:auto;
+
+    padding:40px;
+
+    border:3px dashed #00ff66;
+
+    border-radius:15px;
+
+    background:rgba(0,0,0,.55);
+
+    transition:.3s;
+
+}
+
+#drop-area p{
+
+    margin:10px;
+
+}
+
+#drop-area.highlight{
+
+    background:rgba(0,255,0,.2);
+
+    border-color:#00ffff;
+
+}
+
+#browse-btn{
+
+    padding:12px 25px;
+
+    border:none;
+
+    background:#00ff66;
+
+    color:black;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    border-radius:6px;
+
+    transition:.3s;
+
+}
+
+#browse-btn:hover{
+
+    background:#00cc55;
+
+}
+
+#file-name{
+
+    color:white;
+
+    margin-top:20px;
+
+    font-size:18px;
+
+}
